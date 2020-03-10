@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-md-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Country</label>
+            </div>
+            <select (change)="countrySelected( $event ) " class="custom-select" id="inputGroupSelect01">
+              <option value="" selected>Choose...</option>
+              <option value="co">Colombia</option>
+              <option value="mx">México</option>
+              <option value="ar">Argentina</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">City</label>
+            </div>
+            <select (change)="citySelected( $event ) " class="custom-select" id="inputGroupSelect01">
+              <option value="" selected>Choose...</option>
+              <option value="bogota">Bogota</option>
+              <option value="cdmx">CDMX</option>
+              <option value="buenos_aires">Buenos Aires</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">OS-app</label>
+            </div>
+            <select (change)="osAppSelected( $event ) " class="custom-select" id="inputGroupSelect01">
+              <option value="" selected>Choose...</option>
+              <option value="com.pagatodo.yawallet-V1.0.9">com.pagatodo.yawallet-V1.0.9</option>
+              <option value="com.pagatodo.yawallet-V0.0.9">com.pagatodo.yawallet-V0.0.9</option>
+              <option value="com.pagatodo.yawallet-V1.1.2">com.pagatodo.yawallet-V1.1.2</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Event</label>
+            </div>
+            <select (change)="eventSelected( $event ) " class="custom-select" id="inputGroupSelect01">
+              <option value="" selected>Choose...</option>
+              <option value="login">Login</option>
+              <option value="compra_kit">Compra Kit</option>
+              <option value="adquirencia_money_in">Adquirencia Money In</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="filteredData.length == 0" class="alert alert-danger text-center" role="alert">
+    No Matches!
+</div>
+
+<google-map width="100%" heigth="100%" [center]="position" [zoom]="zoom">
+    <map-marker *ngFor="let marker of filteredData" [position]="{ lat: marker.lat, lng: marker.lng }" [label]="marker.event"></map-marker>
+</google-map>
